@@ -420,7 +420,7 @@ addEventSubmit.addEventListener("click", () => {
 });
 
 //function to delete event when clicked on event
-eventsContainer.addEventListener("click", (e) => {
+/* eventsContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("event")) {
     if (confirm("Are you sure you want to delete this event?")) {
       const eventTitle = e.target.children[0].children[1].innerHTML;
@@ -449,7 +449,89 @@ eventsContainer.addEventListener("click", (e) => {
       updateEvents(activeDay);
     }
   }
+}); */
+eventsContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("event")) {
+    // Get event details
+    const eventTitle = e.target.children[0].children[1].innerHTML;
+    const eventDate = e.target.parentNode.dataset.date; // Assuming 'date' attribute is set on the event container
+
+    // Create the modal
+    const modal = document.createElement("div");
+    modal.classList.add("event-modal"); // Add a class for styling
+
+    // Add event information
+    const eventInfo = document.createElement("div");
+    eventInfo.innerHTML = `
+      <h3>${eventTitle}</h3>
+      <p>Date: ${eventDate}</p>
+    `;
+    modal.appendChild(eventInfo);
+
+    // Add edit and delete buttons
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", () => {
+      // Implement edit functionality here
+      // ...
+      modal.remove(); // Remove the modal after editing
+    });
+    buttonContainer.appendChild(editButton);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => {
+      // Delete event logic goes here
+      eventsArr.forEach((event) => {
+        if (
+          event.day === activeDay &&
+          event.month === month + 1 &&
+          event.year === year
+        ) {
+          event.events.forEach((item, index) => {
+            if (item.title === eventTitle) {
+              event.events.splice(index, 1);
+            }
+          });
+          //if no events left in a day then remove that day from eventsArr
+          if (event.events.length === 0) {
+            eventsArr.splice(eventsArr.indexOf(event), 1);
+            //remove event class from day
+            const activeDayEl = document.querySelector(".day.active");
+            if (activeDayEl.classList.contains("event")) {
+              activeDayEl.classList.remove("event");
+            }
+          }
+        }
+      });
+      updateEvents(activeDay);
+      modal.remove(); // Remove the modal after deletion
+    });
+    buttonContainer.appendChild(deleteButton);
+
+    modal.appendChild(buttonContainer);
+
+    // Append the modal to the body
+    document.body.appendChild(modal);
+  }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //function to save events in local storage
 function saveEvents() {

@@ -39,7 +39,7 @@ body{
 
 .container{
   display: flex;
-  width: 70%;
+  width: 100%;
   padding: .5em;
   color: #fff;
   border-radius: .5em;
@@ -560,4 +560,65 @@ body{
 }
 .credits a:hover {
   text-decoration: underline;
+}
+
+
+
+
+
+.event-modal {
+  position: absolute; /* Use absolute positioning */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Account for offset */
+  background-color: #fff; /* Modal background color */
+  padding: 20px; /* Modal padding */
+  border-radius: 5px; /* Modal border radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Modal shadow */
+  max-width: 800px; /* Optional: Set a maximum width */
+  width: 90%; /* Modal width */
+}
+
+.event-modal h3 {
+  margin-top: 0; /* Remove default margin */
+}
+
+.event-modal p {
+  margin-bottom: 10px; /* Add some space between title and date */
+}
+
+.button-container {
+  display: flex; /* Arrange buttons horizontally */
+  justify-content: space-between; /* Distribute buttons evenly */
+}
+
+.button-container button {
+  padding: 10px 20px; /* Button padding */
+  border: none; /* Remove default button border */
+  border-radius: 5px; /* Button border radius */
+  cursor: pointer; /* Indicate clickable area */
+}
+
+.button-container button:hover {
+  background-color: #eee; /* Button hover effect */
+}
+
+/* Optional: Styles for the edit button */
+.button-container button.edit {
+  background-color: #007bff; /* Blue background */
+  color: #fff; /* White text */
+}
+
+.button-container button.edit:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Optional: Styles for the delete button */
+.button-container button.delete {
+  background-color: #dc3545; /* Red background */
+  color: #fff; /* White text */
+}
+
+.button-container button.delete:hover {
+  background-color: #c82333; /* Darker red on hover */
 }
